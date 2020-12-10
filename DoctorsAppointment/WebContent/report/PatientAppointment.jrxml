@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SalesReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3e4301a2-d6f0-45a8-8140-2053cd95ffad">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="salesDtlId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalAmont" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalAmount" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT s.batchNo,s.mrpPrice,s.quantity,s.amount,s.taxamount,m.medicineName,sd.custName, s.sgstTaxAmt, s.cgstTaxAmt
+from salesmodel s
+LEFT JOIN salesdetailmodel sd ON s.salesDtlId=sd.salesDtlId
+LEFT JOIN medicinemastermodel m ON s.medicineId=m.medicineId
+
+where sd.salesDtlId=$P{salesDtlId}]]>
+	</queryString>
+	<field name="batchNo" class="java.lang.String"/>
+	<field name="mrpPrice" class="java.lang.Double"/>
+	<field name="quantity" class="java.lang.Integer"/>
+	<field name="amount" class="java.lang.Double"/>
+	<field name="taxamount" class="java.lang.Double"/>
+	<field name="medicineName" class="java.lang.String"/>
+	<field name="custName" class="java.lang.String"/>
+	<field name="sgstTaxAmt" class="java.lang.Double"/>
+	<field name="cgstTaxAmt" class="java.lang.Double"/>
+	<variable name="Total" class="java.lang.Double" calculation="Sum"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="103" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="2ffce842-eaa6-4bd6-8b3d-85942993d422" x="272" y="0" width="271" height="88"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a1c0f284-93f1-421d-934b-d231b7dde140" x="0" y="0" width="272" height="88"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="461642be-d6b3-4035-9d07-af5affc8d5e4" x="5" y="0" width="245" height="27"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Astha Health Care]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f6980118-8862-49a5-b65f-362ad00ea64f" x="5" y="27" width="245" height="20"/>
+				<textElement/>
+				<text><![CDATA[Sadhashiv Peth ,Pune -37]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="408fe51f-6af3-4c23-bb73-a6e9231dd673" x="279" y="5" width="82" height="18"/>
+				<textElement/>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9dd61347-327c-4b69-ae6f-09ca78a8a9d9" x="5" y="47" width="82" height="22"/>
+				<textElement/>
+				<text><![CDATA[Patient Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="21d01f65-89ce-4057-96db-8e1e19460397" x="5" y="69" width="82" height="22"/>
+				<textElement/>
+				<text><![CDATA[Doctor Name:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b31e76f3-c0aa-45a1-a3ca-a37ea4f4497f" x="87" y="47" width="100" height="22"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{patientname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1c17fcbd-dfd5-4aa4-9638-803c5b52b8ec" x="279" y="43" width="82" height="22"/>
+				<textElement/>
+				<text><![CDATA[Addr:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="786fcce5-5314-4da0-ba94-79b27835bb53" x="279" y="65" width="82" height="22"/>
+				<textElement/>
+				<text><![CDATA[Addr:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="a9e55c0e-cc1a-4d73-98ff-eb4718c44c1f" x="361" y="6" width="100" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="1368e3f0-bf4c-4560-b46e-100358525268" x="0" y="91" width="544" height="1"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement uuid="08b6e8f9-2bd7-4a4d-89d0-e065516ae1b3" x="196" y="0" width="150" height="23"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="5d536887-4e02-472d-b626-972b1db2de48" x="197" y="0" width="150" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Patient Appointment]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5a626024-9527-4c34-bcc7-344c713d50e8" x="0" y="0" width="44" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Sr.No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d0216851-91de-4956-b7fb-091f5c557658" x="44" y="0" width="126" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Patient Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad02803c-9a62-4197-b079-6ea2e88a0d4c" x="170" y="0" width="53" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Patient Age]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="93a8bd37-c17f-42c6-ae44-b423a866cbba" x="222" y="0" width="112" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Patient Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2a5ef02d-d3f3-41bc-9a59-0e136fad7e63" x="334" y="0" width="87" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3517c8a7-d282-420a-8235-c6ce90cca1ae" x="422" y="0" width="88" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Appointment Date]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1368e3f0-bf4c-4560-b46e-100358525268" x="4" y="20" width="540" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="a162ebb0-1fc8-495f-819f-b7a340ee2b3c" x="422" y="20" width="89" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dateofappointment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d92e35ba-f5f1-4e91-bb99-d5698cf4b33e" x="334" y="20" width="87" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{patientemail}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dc6925ad-7896-4d6a-9ba8-3a848120e140" x="0" y="0" width="44" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="047d83dd-24b1-4903-b814-362644417c72" x="44" y="0" width="126" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{patientname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cedac868-c886-47f5-8ad2-4c3ac4aed4f9" x="169" y="0" width="53" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{patientage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="73f8173f-cd0f-47e4-9520-b9d86b9e7d85" x="222" y="1" width="112" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{patientaddress}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement uuid="44066a6c-33e7-4c45-966d-1cb8191c7df4" x="0" y="0" width="544" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="44" splitType="Stretch">
+			<line>
+				<reportElement uuid="1368e3f0-bf4c-4560-b46e-100358525268" x="4" y="0" width="544" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
